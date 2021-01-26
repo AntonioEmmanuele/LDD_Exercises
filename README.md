@@ -8,4 +8,4 @@ GNU General Public License along with this program. If not, see http://www.gnu.o
 This is an implementation of the sleep until function based on the vTaskDelayUntil. Please check:
 
 This repository contains some of my exercises about Linux Device Drivers. 
-These exercises are not intended to be the best solution or the official guide to some problems.
+ These exercises are not intended to be the best solution or the official guide to some problems.
