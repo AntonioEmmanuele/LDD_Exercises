@@ -48,3 +48,4 @@ static void my_mod_exit(void){
 module_init(my_mod_init);
 module_exit(my_mod_exit);
 MODULE_LICENSE("GPL");
+MODULE_AUTHOR("Antonio Emmanuele");
