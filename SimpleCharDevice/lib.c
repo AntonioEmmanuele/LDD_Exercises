@@ -126,11 +126,6 @@ long my_file_ioctl(struct file*filep,unsigned int cmd, unsigned long arg){
 		printk(KERN_ALERT "Invalid argument type \n");
 		return -ENOTTY;
 	}
-	if(_IOC_NR(cmd)>MYFILE_IOC_MAXNR)
-	{
-		printk(KERN_ALERT "Invalid command  \n");
-		return -ENOTTY;
-	}
 	/*cmd : type-cmd-direction-size, it is a bitmask*/
 	if(_IOC_DIR(cmd)){
 		printk(KERN_ALERT "Reading or writing command received \n");
