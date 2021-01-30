@@ -1,3 +1,24 @@
+/****************************************************************************************
+* This file is part of LDD_Exercises Project. *
+* *
+* Copyright  © 2021 By Antonio Emmanuele. All rights reserved. *
+* @mail: antony.35.ae@gmail.com *
+* *
+* LDD_Exercises is free software: you can redistribute it and/or modify *
+* it under the terms of the GNU General Public License as published by *
+* the Free Software Foundation, either version 3 of the License, or *
+* (at your option) any later version. *
+* *
+* LDD_Exercises is distributed in the hope that it will be useful, *
+* but WITHOUT ANY WARRANTY; without even the implied warranty of *
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the *
+* GNU General Public License for more details. *
+* *
+* You should have received a copy of the GNU General Public License *
+* along with The ProjectName Project. If not, see <https://www.gnu.org/licenses/>. *
+* *
+* In case of use of this project, I ask you to mention me, to whom it may concern. *
+*****************************************************************************************/
 #ifndef LIB_H
 #define LIB_H
 #include "linux/module.h"
