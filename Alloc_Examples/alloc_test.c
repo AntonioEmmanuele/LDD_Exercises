@@ -10,6 +10,7 @@ static int fd;
 static unsigned int ctl=1;
 static unsigned int cmd=0;
 static size_t  mem =0;
+static unsigned long counter=0;
 int main(void){
 	fd=open("/dev/My_file0",O_RDWR);
 	if(fd<0){
@@ -18,7 +19,7 @@ int main(void){
 	}
 	int err=0;
 	while(ctl){
-		printf(" \n \n \n Insert 1 for allocate mem using ktim \n Insert 2 to do a mem test  \n Insert 3  to free mem \n Insert 4 to wait yielding cpu \n Insert 5 to wait with wait_queues \n Insert 10 to exit \n \n \n \n " );
+		printf(" \n \n \n Insert 1 for allocate mem using ktim \n Insert 2 to do a mem test  \n Insert 3  to free mem \n Insert 4 to incremenent per-cpu counter \n Insert 5 to decrement pcpu counter \n Insert 6 to print PCPU counter \n Insert 10 to exit \n \n \n \n " );
 		scanf("%u",&cmd);
 		switch(cmd){
 			case 1:
@@ -41,7 +42,24 @@ int main(void){
 				if(err<0)
 					printf("Error %d \n",err);
 				break;
-				
+			case 4:
+				err=ioctl(fd,MYFILE_IOC_PERCPUINC,NULL);
+				if(err<0)
+					printf("Error %d \n",err);
+				break;
+			case 5:
+				err=ioctl(fd,MYFILE_IOC_PERCPUDEC,NULL);
+				if(err<0)
+					printf("Error %d \n",err);
+				break;
+			case 6:
+				err=ioctl(fd,MYFILE_IOC_PERCPUPRINT,&counter);
+				if(err<0)
+					printf("Error %d \n",err);
+				else
+					printf("The value of the counter is %lu \n",counter);
+				break;
+
 			case 10:
 				ctl=0;
 				break;

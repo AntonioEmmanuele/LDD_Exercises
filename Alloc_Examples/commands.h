@@ -34,10 +34,11 @@
 #define MYFILE_IOC_KMEMFREE   _IO(MYFILE_IOC_TYPE,1)
 /*Checks if we have allocated memory*/
 #define MYFILE_IOC_KMEMCHECK  _IOR(MYFILE_IOC_TYPE,2,int)
-/*Allocate memory with kmem_cache_t*/
-#define MYFILE_IOC_CACHEALLOC _IO(MYFILE_IOC_TYPE,3)
-/*Free memory preeviously allocated with kmem_cache_t*/
-#define MYFILE_IOC_CACHEFREE _IO(MYFILE_IOC_TYPE,4)
-
-#define MYFILE_IOC_MAXNR 4
+/*Increment per cpu var*/
+#define MYFILE_IOC_PERCPUINC _IO(MYFILE_IOC_TYPE,3)
+/*Decrements per cpu var*/
+#define MYFILE_IOC_PERCPUDEC _IO(MYFILE_IOC_TYPE,4)
+/*print per cpu var*/
+#define MYFILE_IOC_PERCPUPRINT _IOR(MYFILE_IOC_TYPE,5,int)
+#define MYFILE_IOC_MAXNR 5
 #endif

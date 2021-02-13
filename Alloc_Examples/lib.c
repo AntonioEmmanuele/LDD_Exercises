@@ -21,6 +21,7 @@
 *****************************************************************************************/
 #include "lib.h"
 static myfile* cb_ptr;
+DEFINE_PER_CPU(unsigned long,counter);
 /*Callback function of the timer ,don't use static*/
 void timer_callback(unsigned long arg){
 	/* 
@@ -53,6 +54,9 @@ int myfile_init(myfile* newfile,struct file_operations*fops,unsigned int basemin
 	newfile->to_alloc=0;
 	newfile->to_wait=to_wait;
 	timer_setup(&newfile->my_timer,(void*)timer_callback,0);
+	/* When accessing a mypcpu variable we must disable preemption, use these fun*/
+	get_cpu_var(counter)=0;
+	put_cpu_var(counter);
 	return err;
 }
 int myfile_open(struct inode*inodep,struct file*filep){
@@ -108,6 +112,21 @@ long myfile_ioctl(struct file*filep,unsigned int cmd,unsigned long arg){
 			kfree(ptr->ptr);
 			ptr->ptr=0;
 			printk(KERN_ALERT  "Memory freed \n");
+			break;
+		case MYFILE_IOC_PERCPUINC:
+			/* When accessing a mypcpu variable we must disable preemption, use these fun*/
+			get_cpu_var(counter)++;
+			put_cpu_var(counter);
+			break;
+		case MYFILE_IOC_PERCPUDEC:
+			/* When accessing a mypcpu variable we must disable preemption, use these fun*/
+			get_cpu_var(counter)--;
+			put_cpu_var(counter);
+			break;
+		case MYFILE_IOC_PERCPUPRINT:
+			/* When accessing a mypcpu variable we must disable preemption, use these fun*/
+			printk(KERN_ALERT "The value of the variable is %lu \n",get_cpu_var(counter));
+			__put_user(get_cpu_var(counter),(unsigned long __user*)arg);
 			break;
 		default:
 			printk(KERN_ALERT "Invalid cmd \n");
